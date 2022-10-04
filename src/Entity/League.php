@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\DTO\League\LeagueGetOutput;
+use App\DTO\League\LeagueListOutput;
 use App\Repository\LeagueRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +12,20 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LeagueRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => LeagueListOutput::class,
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => LeagueGetOutput::class,
+        ],
+    ]
+)]
 class League
 {
     #[ORM\Id]
