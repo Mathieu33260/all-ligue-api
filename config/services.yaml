@@ -20,6 +20,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\OpenApi\JwtDecorator:
+        decorates: 'api_platform.openapi.factory'
+        arguments: [ '@.inner' ]
+
     App\Listener\User\UserPreUpdateListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
