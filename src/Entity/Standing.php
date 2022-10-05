@@ -3,12 +3,29 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\DTO\Standing\StandingGetOutput;
+use App\DTO\Standing\StandingListOutput;
 use App\Repository\StandingRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StandingRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => StandingListOutput::class,
+            'normalization_context' => ['groups' => ['standing:collection:get']],
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => StandingGetOutput::class,
+            'normalization_context' => ['groups' => ['standing:item:get']],
+        ],
+    ]
+)]
 class Standing
 {
     #[ORM\Id]
