@@ -72,6 +72,9 @@ class Team
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: PlayerStat::class)]
     private Collection $playerStats;
 
+    #[ORM\OneToMany(mappedBy: 'favoriteTeam', targetEntity: User::class)]
+    private Collection $users;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -85,6 +88,7 @@ class Team
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
         $this->playerStats = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -474,6 +478,36 @@ class Team
             // set the owning side to null (unless already changed)
             if ($playerStat->getTeam() === $this) {
                 $playerStat->setTeam(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setFavoriteTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getFavoriteTeam() === $this) {
+                $user->setFavoriteTeam(null);
             }
         }
 

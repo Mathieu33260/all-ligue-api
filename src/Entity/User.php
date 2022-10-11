@@ -86,6 +86,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Team $favoriteTeam = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -218,6 +221,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getFavoriteTeam(): ?Team
+    {
+        return $this->favoriteTeam;
+    }
+
+    public function setFavoriteTeam(?Team $favoriteTeam): self
+    {
+        $this->favoriteTeam = $favoriteTeam;
 
         return $this;
     }
