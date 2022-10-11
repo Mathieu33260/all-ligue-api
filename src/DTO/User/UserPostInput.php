@@ -19,17 +19,14 @@ class UserPostInput
     #[Assert\NotBlank]
     public string $password;
 
-    #[Assert\NotBlank]
     public string $firstName;
 
-    #[Assert\NotBlank]
     public string $lastName;
 
     /**
      * @UniqueUsername()
      */
-    #[Assert\NotBlank]
-    public string $userName;
+    public ?string $userName;
 
     public ?Team $favoriteTeam = null;
 }

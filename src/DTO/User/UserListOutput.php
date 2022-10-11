@@ -14,7 +14,7 @@ class UserListOutput
     public string $email;
 
     #[Groups(['user:collection:get'])]
-    public string $userName;
+    public ?string $userName;
 
     #[Groups(['user:collection:get'])]
     public ?Team $favoriteTeam;

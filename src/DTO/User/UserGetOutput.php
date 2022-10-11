@@ -14,13 +14,13 @@ class UserGetOutput
     public string $email;
 
     #[Groups(['user:item:get'])]
-    public string $firstName;
+    public ?string $firstName;
 
     #[Groups(['user:item:get'])]
-    public string $lastName;
+    public ?string $lastName;
 
     #[Groups(['user:item:get'])]
-    public string $userName;
+    public ?string $userName;
 
     #[Groups(['user:item:get'])]
     public ?Team $favoriteTeam;

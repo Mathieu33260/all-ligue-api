@@ -8,9 +8,9 @@ class UserPutOutput
 
     public string $email;
 
-    public string $userName;
+    public ?string $userName;
 
-    public string $firstName;
+    public ?string $firstName;
 
-    public string $lastName;
+    public ?string $lastName;
 }
