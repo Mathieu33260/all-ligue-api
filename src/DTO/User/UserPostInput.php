@@ -2,6 +2,7 @@
 
 namespace App\DTO\User;
 
+use App\Entity\Team;
 use App\Validator\User\UniqueEmail;
 use App\Validator\User\UniqueUsername;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -29,4 +30,6 @@ class UserPostInput
      */
     #[Assert\NotBlank]
     public string $userName;
+
+    public ?Team $favoriteTeam = null;
 }

@@ -28,6 +28,7 @@ class UserPutInputDataTransformer implements DataTransformerInitializerInterface
         $userPutInput = new UserPutInput();
         $userPutInput->firstName = $existingUser->getFirstName();
         $userPutInput->lastName = $existingUser->getLastName();
+        $userPutInput->favoriteTeam = $existingUser->getFavoriteTeam();
 
         return $userPutInput;
     }
@@ -43,6 +44,7 @@ class UserPutInputDataTransformer implements DataTransformerInitializerInterface
         $existingUser = $context[AbstractItemNormalizer::OBJECT_TO_POPULATE];
         $existingUser->setFirstName($userPutInput->firstName);
         $existingUser->setLastName($userPutInput->lastName);
+        $existingUser->setFavoriteTeam($userPutInput->favoriteTeam);
 
         return $existingUser;
     }

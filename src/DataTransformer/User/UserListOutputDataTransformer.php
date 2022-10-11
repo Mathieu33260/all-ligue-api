@@ -17,6 +17,7 @@ class UserListOutputDataTransformer implements DataTransformerInterface
         $userListOutput->email = $user->getEmail();
         $userListOutput->id = $user->getId();
         $userListOutput->userName = $user->getUserName();
+        $userListOutput->favoriteTeam = $user->getFavoriteTeam();
 
         return $userListOutput;
     }

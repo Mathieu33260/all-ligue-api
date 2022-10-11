@@ -2,7 +2,7 @@
 
 namespace App\DTO\User;
 
-use App\Validator\User\UniqueUsername;
+use App\Entity\Team;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UserPutInput
@@ -16,4 +16,6 @@ class UserPutInput
      * @Assert\NotBlank
      */
     public ?string $lastName;
+
+    public ?Team $favoriteTeam;
 }

@@ -28,6 +28,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
             'method' => 'GET',
             'output' => UserListOutput::class,
             'security' => "is_granted('ROLE_ADMIN')",
+            'normalization_context' => ['groups' => ['user:collection:get']],
         ]
     ],
     itemOperations: [
@@ -35,6 +36,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
             'method' => 'GET',
             'output' => UserGetOutput::class,
             'security' => "is_granted('ROLE_ADMIN') or object == user",
+            'normalization_context' => ['groups' => ['user:item:get']],
         ],
         'put' => [
             'method' => 'PUT',

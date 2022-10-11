@@ -19,6 +19,7 @@ class UserGetOutputDataTransformer implements DataTransformerInterface
         $userGetOutput->firstName = $user->getFirstName();
         $userGetOutput->lastName = $user->getLastName();
         $userGetOutput->userName = $user->getUserName();
+        $userGetOutput->favoriteTeam = $user->getFavoriteTeam();
 
         return $userGetOutput;
     }

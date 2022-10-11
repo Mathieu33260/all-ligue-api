@@ -34,6 +34,7 @@ class UserPostInputDataTransformer implements DataTransformerInterface
         $user->setFirstName($userPostInput->firstName);
         $user->setLastName($userPostInput->lastName);
         $user->setUserName($userPostInput->userName);
+        $user->setFavoriteTeam($userPostInput->favoriteTeam);
 
         return $user;
     }
