@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
 #[ApiResource]
@@ -16,24 +17,31 @@ class Team
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?int $apiId = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?string $code = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?string $country = null;
 
     #[ORM\Column]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?int $founded = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?string $logo = null;
 
     #[ORM\OneToOne(mappedBy: 'team', cascade: ['persist', 'remove'])]

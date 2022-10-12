@@ -19,9 +19,9 @@ class UserPostInput
     #[Assert\NotBlank]
     public string $password;
 
-    public string $firstName;
+    public ?string $firstName;
 
-    public string $lastName;
+    public ?string $lastName;
 
     /**
      * @UniqueUsername()

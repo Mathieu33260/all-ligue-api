@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\DTO\Standing\StandingGetOutput;
 use App\DTO\Standing\StandingListOutput;
 use App\Repository\StandingRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: StandingRepository::class)]
 #[ApiResource(
@@ -24,6 +27,12 @@ use Doctrine\ORM\Mapping as ORM;
             'output' => StandingGetOutput::class,
             'normalization_context' => ['groups' => ['standing:item:get']],
         ],
+    ]
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'league.id' => 'exact',
     ]
 )]
 class Standing
@@ -57,6 +66,7 @@ class Standing
 
     #[ORM\ManyToOne(inversedBy: 'standings')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['standing:item:get', 'standing:collection:get'])]
     private ?Team $team = null;
 
     #[ORM\Column]
