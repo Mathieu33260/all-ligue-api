@@ -10,12 +10,12 @@ class UserPutInput
     /**
      * @Assert\NotBlank
      */
-    public ?string $firstName;
+    public ?string $firstName = null;
 
     /**
      * @Assert\NotBlank
      */
-    public ?string $lastName;
+    public ?string $lastName = null;
 
     public ?Team $favoriteTeam;
 }
