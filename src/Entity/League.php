@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\DTO\League\LeagueGetOutput;
 use App\DTO\League\LeagueListOutput;
 use App\Repository\LeagueRepository;
@@ -24,6 +26,12 @@ use Doctrine\ORM\Mapping as ORM;
             'method' => 'GET',
             'output' => LeagueGetOutput::class,
         ],
+    ]
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'season' => 'exact',
     ]
 )]
 class League
