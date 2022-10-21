@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PlayerPositionRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PlayerPositionRepository::class)]
 #[ApiResource]
@@ -14,22 +15,28 @@ class PlayerPosition
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['lineup:item:get'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['lineup:item:get'])]
     private ?int $number = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $position = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $grid = null;
 
     #[ORM\Column]
+    #[Groups(['lineup:item:get'])]
     private ?bool $isStarter = null;
 
     #[ORM\ManyToOne(inversedBy: 'playerPositions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['lineup:item:get'])]
     private ?Player $player = null;
 
     #[ORM\ManyToOne(inversedBy: 'playerPositions')]

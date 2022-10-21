@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
 #[ApiResource]
@@ -16,36 +17,47 @@ class Player
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['lineup:item:get'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['lineup:item:get'])]
     private ?int $apiId = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['lineup:item:get'])]
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?int $age = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?int $number = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $position = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $photo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?string $lastName = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['lineup:item:get'])]
     private ?bool $injured = null;
 
     #[ORM\ManyToOne(inversedBy: 'players')]
