@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use App\DTO\Game\GameGetOutput;
+use App\DTO\Game\GameListOutput;
 use App\Repository\GameRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +14,28 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GameRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => GameListOutput::class,
+            'normalization_context' => ['groups' => ['game:collection:get']],
+        ],
+    ],
+    itemOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => GameGetOutput::class,
+            'normalization_context' => ['groups' => ['game:item:get']],
+        ],
+    ]
+)]
+#[ApiFilter(
+    BooleanFilter::class,
+    properties: [
+        'round.current',
+    ]
+)]
 class Game
 {
     #[ORM\Id]
