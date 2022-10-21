@@ -3,12 +3,22 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\DTO\Event\EventListOutput;
 use App\Repository\EventRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'GET',
+            'output' => EventListOutput::class,
+            'normalization_context' => ['groups' => ['event:collection:get']],
+        ],
+    ],
+    itemOperations: [],
+)]
 class Event
 {
     #[ORM\Id]
